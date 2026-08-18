@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maine Coast Trip · Sept 27 – Oct 1, 2026</title>
+<style>
+  :root {
+    --navy: #123047;
+    --teal: #1f6f78;
+    --lobster: #c1440e;
+    --sand: #f6f1e7;
+    --sand-dark: #ebe2cc;
+    --cream: #fffdf8;
+    --ink: #22303c;
+    --muted: #5c6b74;
+    --line: #ddd3ba;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--sand);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  header {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    color: #fff;
+    padding: 28px 18px 22px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 1.5rem;
+    letter-spacing: 0.3px;
+  }
+  header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+  nav.jump {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 10px 12px;
+    background: var(--navy);
+    -webkit-overflow-scrolling: touch;
+  }
+  nav.jump a {
+    flex: 0 0 auto;
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px 14px 60px;
+  }
+  section { margin-bottom: 22px; scroll-margin-top: 150px; }
+  h2.section-title {
+    color: var(--navy);
+    font-size: 1.15rem;
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--line);
+  }
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .booking-card .dates {
+    display: inline-block;
+    background: var(--sand-dark);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 0.78rem;
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .booking-card h3 { margin: 4px 0 2px; font-size: 1.02rem; color: var(--navy); }
+  .booking-card .addr { color: var(--muted); font-size: 0.88rem; margin-bottom: 6px; }
+  .booking-card .meta { font-size: 0.82rem; color: var(--muted); }
+  .call-btn {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--teal);
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .balance-flag {
+    color: var(--lobster);
+    font-weight: 600;
+  }
+  details.day {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  details.day > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    background: var(--sand-dark);
+    font-weight: 700;
+    color: var(--navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  details.day > summary::-webkit-details-marker { display: none; }
+  details.day > summary .chev { transition: transform 0.2s; font-size: 0.8rem; color: var(--teal); }
+  details.day[open] > summary .chev { transform: rotate(90deg); }
+  details.day .day-body { padding: 14px 16px 4px; }
+  details.day .day-note { font-style: italic; color: var(--muted); margin: 0 0 10px; font-size: 0.9rem; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .timeline-item .time {
+    font-weight: 700;
+    color: var(--teal);
+    font-size: 0.82rem;
+    padding-top: 1px;
+  }
+  .timeline-item .desc { font-size: 0.94rem; }
+  .timeline-item .desc.highlight { font-weight: 700; color: var(--lobster); }
+  .timeline-item ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.88rem; color: var(--muted); }
+  .overnight-tag {
+    margin-top: 6px;
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+  }
+  table.cost {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--cream);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  table.cost th {
+    background: var(--navy);
+    color: #fff;
+    text-align: left;
+    padding: 9px 12px;
+    font-size: 0.82rem;
+  }
+  table.cost td {
+    padding: 9px 12px;
+    border-top: 1px solid var(--line);
+  }
+  table.cost tr.total td {
+    font-weight: 700;
+    background: var(--sand-dark);
+  }
+  .dining-day { margin-bottom: 12px; }
+  .dining-day .d-label {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  .dining-day .d-meal { font-size: 0.9rem; margin-bottom: 4px; }
+  .dining-day .d-meal b { color: var(--teal); }
+  .top-meals { padding-left: 18px; font-size: 0.92rem; }
+  .top-meals li { margin-bottom: 5px; }
+  .blueberry-note {
+    margin-top: 10px;
+    font-style: italic;
+    color: var(--lobster);
+    font-size: 0.9rem;
+  }
+  .must-list { list-style: none; padding: 0; margin: 0; }
+  .must-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 0.9rem;
+  }
+  .must-list li:last-child { border-bottom: none; }
+  .tag-must { background: var(--lobster); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .tag-high { background: var(--teal); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .tag-med { background: var(--sand-dark); color: var(--navy); font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .skip-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+  .skip-list li {
+    background: #f1e8e8;
+    color: #8a4a4a;
+    font-size: 0.82rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .contact-list { list-style: none; padding: 0; margin: 0; }
+  .contact-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+  }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-list a.tel {
+    color: var(--teal);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 20px 14px 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🦞 Maine Coast Trip</h1>
+  <p>September 27 – October 1, 2026 · Michael &amp; Anne</p>
+</header>
+
+<nav class="jump">
+  <a href="#bookings">Bookings</a>
+  <a href="#day27">Sep 27</a>
+  <a href="#day28">Sep 28</a>
+  <a href="#day29">Sep 29</a>
+  <a href="#day30">Sep 30</a>
+  <a href="#day1">Oct 1</a>
+  <a href="#dining">Dining</a>
+  <a href="#musthave">Must-Do</a>
+  <a href="#costs">Costs</a>
+  <a href="#contacts">Contacts</a>
+</nav>
+
+<main>
+
+  <section id="bookings">
+    <h2 class="section-title">Confirmed Bookings</h2>
+    <div class="booking-grid">
+
+      <div class="card booking-card">
+        <span class="dates">Sep 27–28 · 1 night</span>
+        <h3>Hampton Inn Waterbury</h3>
+        <div class="addr">777 Chase Parkway, Waterbury, CT 06708</div>
+        <div class="meta">Confirmation #94457531 · $89.70</div>
+        <a class="call-btn" href="tel:+12037531777">Call (203) 753-1777</a>
+      </div>
+
+      <div class="card booking-card">
+        <span class="dates">Sep 28–29 · 1 night</span>
+        <h3>Hampton Inn &amp; Suites Portland West</h3>
+        <div class="addr">1210 Brighton Ave, Portland, ME 04102</div>
+        <div class="meta">Confirmation #90805947 · $127.23</div>
+        <a class="call-btn" href="tel:+12076133420">Call (207) 613-3420</a>
+      </div>
+
+      <div class="card booking-card">
+        <span class="dates">Sep 29–30 · 1 night</span>
+        <h3>Brewster House B&amp;B <span style="font-weight:400;font-size:0.85rem;">(Blue Hill Bay room)</span></h3>
+        <div class="addr">180 Main Street, Freeport, ME 04032</div>
+        <div class="meta">Confirmation #T9369474 · $224.54 total — <span class="balance-flag">$124.54 due at arrival</span></div>
+        <a class="call-btn" href="tel:+12078654121">Call (207) 865-4121</a>
+      </div>
+
+      <div class="card booking-card">
+        <span class="dates">Sep 30–Oct 1 · 1 night</span>
+        <h3>Hampton Inn &amp; Suites Kittery-Portsmouth</h3>
+        <div class="addr">275 US Route 1, Kittery, ME 03904</div>
+        <div class="meta">Confirmation #90599003 · $116.63</div>
+        <a class="call-btn" href="tel:+12075447285">Call (207) 544-7285</a>
+      </div>
+
+      <div class="card booking-card" style="border-color:var(--lobster);">
+        <span class="dates" style="background:var(--lobster);color:#fff;">Mon Sep 28 · 2:00–3:30 PM</span>
+        <h3>Lucky Catch Cruises</h3>
+        <div class="addr">170 Commercial St (Long Wharf), Portland, ME 04101</div>
+        <div class="meta">Booking #371360391 · 2 Adults · $127.20 paid in full</div>
+        <div class="meta" style="margin-top:4px;">Arrive 20 min early to check in at the ticket booth. Parking nearby is difficult — leave extra time. Bring a layer, it's 10–15°F cooler on the water.</div>
+        <a class="call-btn" href="tel:+12077610941">Call (207) 761-0941</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="day27">
+    <h2 class="section-title">Day-by-Day</h2>
+    <details class="day" open>
+      <summary><span>Sun, Sep 27 — Drive to Waterbury</span><span class="chev">▶</span></summary>
+      <div class="day-body">
+        <p class="day-note">A relaxed driving day. Waterbury is purely an overnight stop — don't try to sightsee.</p>
+        <div class="timeline-item"><div class="time">7:00 AM</div><div class="desc">Depart Waynesboro</div></div>
+        <div class="timeline-item"><div class="time"></div><div class="desc">Along the way: breakfast/coffee stop, lunch, two or three short stretch breaks</div></div>
+        <div class="timeline-item"><div class="time">Late aft.</div><div class="desc">Arrive Waterbury, check into Hampton Inn
+          <ul><li>Optional: Holy Land USA (~1 hr) only if you still have energy — otherwise rest up for Maine</li></ul>
+        </div></div>
+        <div class="timeline-item"><div class="time">Evening</div><div class="desc">Dinner: <b>Sultan's Turkish Restaurant</b> — kebabs, mezze, house bread; a deliberate break before three days of seafood <span style="color:var(--muted);">(Alt: La Tavola, Italian)</span></div></div>
+        <span class="overnight-tag">🌙 Overnight: Hampton Inn Waterbury</span>
+      </div>
+    </details>
+  </section>
+
+  <section id="day28">
+    <details class="day">
+      <summary><span>Mon, Sep 28 — Portland: The Lobster Boat Day</span><span class="chev">▶</span></summary>
+      <div class="day-body">
+        <div class="timeline-item"><div class="time">7:00 AM</div><div class="desc">Breakfast</div></div>
+        <div class="timeline-item"><div class="time">7:30 AM</div><div class="desc">Leave Waterbury, drive to Portland</div></div>
+        <div class="timeline-item"><div class="time">~Noon</div><div class="desc">Arrive Portland — park near Old Port/Long Wharf, keep lunch light</div></div>
+        <div class="timeline-item"><div class="time">2:00 PM</div><div class="desc desc highlight">🦞 Lucky Catch Lobster Cruise — the highlight of the trip
+          <ul>
+            <li>~80–90 min hauling traps, cruising Casco Bay, passing Portland Head Light &amp; Fort Gorges</li>
+            <li>Buy your catch and have it cooked next door at Portland Lobster Company</li>
+          </ul>
+        </div></div>
+        <div class="timeline-item"><div class="time">3:45 PM</div><div class="desc">Old Port — Commercial Street, piers, cobblestone streets. Free; about atmosphere, not shopping</div></div>
+        <div class="timeline-item"><div class="time">5:15 PM</div><div class="desc">Eastern Promenade — walk along Casco Bay</div></div>
+        <div class="timeline-item"><div class="time">6:30 PM</div><div class="desc">Dinner: <b>Scales</b> for a special/celebration dinner on the waterfront, or <b>Luke's Lobster Portland Pier</b> for casual</div></div>
+        <span class="overnight-tag">🌙 Overnight: Hampton Inn &amp; Suites Portland West</span>
+      </div>
+    </details>
+  </section>
+
+  <section id="day29">
+    <details class="day">
+      <summary><span>Tue, Sep 29 — Portland Head Light → Freeport</span><span class="chev">▶</span></summary>
+      <div class="day-body">
+        <p class="day-note">Your iconic Maine scenery day.</p>
+        <div class="timeline-item"><div class="time">7:30 AM</div><div class="desc">Breakfast, check out of Portland hotel</div></div>
+        <div class="timeline-item"><div class="time">8:30 AM</div><div class="desc desc highlight">Portland Head Light + Fort Williams Park — #1 land-based must-see
+          <ul>
+            <li>Lighthouse viewpoints, rocky shoreline, Cliff Walk, old fortifications, Battery Blair, Battery Keyes</li>
+            <li>Park is free; check parking fees for the date</li>
+            <li>This is the priority — don't rush it to fit anything else in</li>
+          </ul>
+        </div></div>
+        <div class="timeline-item"><div class="time">10:30 AM</div><div class="desc">Cape Elizabeth Coastal Drive — Two Lights State Park (30–45 min) if time allows</div></div>
+        <div class="timeline-item"><div class="time">1:00 PM</div><div class="desc">Drive to Freeport</div></div>
+        <div class="timeline-item"><div class="time">2:00 PM</div><div class="desc">Check into Brewster House B&amp;B (180 Main St)</div></div>
+        <div class="timeline-item"><div class="time">Lunch</div><div class="desc">🦞 <b>Linda Bean's Maine Kitchen &amp; Topside Tavern</b> — classic lobster roll, right across from L.L.Bean flagship</div></div>
+        <div class="timeline-item"><div class="time">3:00 PM</div><div class="desc">Walk Freeport — L.L.Bean flagship (95 Main St, open 24/7). Don't devote the whole afternoon to shopping</div></div>
+        <div class="timeline-item"><div class="time">5:30 PM</div><div class="desc">Dinner: <b>Tuscan Brick Oven Bistro</b> — pasta &amp; wood-fired pizza, a deliberate change from seafood</div></div>
+        <span class="overnight-tag">🌙 Overnight: Brewster House B&amp;B, Freeport</span>
+      </div>
+    </details>
+  </section>
+
+  <section id="day30">
+    <details class="day">
+      <summary><span>Wed, Sep 30 — Southern Maine Coastal Road Trip</span><span class="chev">▶</span></summary>
+      <div class="day-body">
+        <p class="day-note">Freeport → Kennebunkport → York → Nubble → Kittery. This is the day to not rush.</p>
+        <div class="timeline-item"><div class="time">8:00 AM</div><div class="desc">Breakfast at Brewster House, check out</div></div>
+        <div class="timeline-item"><div class="time">9:00 AM</div><div class="desc">Leave Freeport, head south toward Kennebunkport</div></div>
+        <div class="timeline-item"><div class="time">10:00 AM</div><div class="desc desc highlight">Kennebunkport — Dock Square, then scenic Ocean Avenue. Not a shopping stop.</div></div>
+        <div class="timeline-item"><div class="time">11:45 AM</div><div class="desc">Lunch: <b>The Clam Shack</b> (on the bridge over the Kennebunk River) — order fried clams &amp; chowder for variety <span style="color:var(--muted);">(Alt: The Boathouse)</span></div></div>
+        <div class="timeline-item"><div class="time">12:30 PM</div><div class="desc">Continue south toward York, coastal route</div></div>
+        <div class="timeline-item"><div class="time">1:00 PM</div><div class="desc">York Harbor — quick stop, ~30 min</div></div>
+        <div class="timeline-item"><div class="time">1:45 PM</div><div class="desc desc highlight">⭐ Nubble Lighthouse (Sohier Park) — absolutely worth it
+          <ul><li>Spend 45–60 min. Completes the lighthouse trio: Portland Head from water, Portland Head from land, Nubble from the coast</li></ul>
+        </div></div>
+        <div class="timeline-item"><div class="time">2:45 PM</div><div class="desc">York Beach / Short Sands Beach — optional; skip if tired. Good ice cream stop if one appears</div></div>
+        <div class="timeline-item"><div class="time">3:15 PM</div><div class="desc">Continue to Kittery</div></div>
+        <div class="timeline-item"><div class="time">3:45 PM</div><div class="desc">Fort Foster Park — final coastal experience
+          <ul><li>Rocky shoreline, wooded paths, historic fortifications, pier, harbor views</li>
+          <li style="color:var(--lobster);">Late September is near the end of the seasonal window — verify 2026 gate hours before you go</li></ul>
+        </div></div>
+        <div class="timeline-item"><div class="time">5:30 PM</div><div class="desc">Check into Hampton Inn &amp; Suites Kittery-Portsmouth</div></div>
+        <div class="timeline-item"><div class="time">6:00 PM</div><div class="desc">Final dinner: <b>Robert's Maine Grill</b> — splurge night (steamed lobster, or haddock/chowder if you're done with lobster), or <b>The Black Birch</b> gastropub for something different</div></div>
+        <div class="timeline-item"><div class="time">After</div><div class="desc">Optional: Pepperrell Cove for a short waterfront walk, if you have energy left</div></div>
+        <span class="overnight-tag">🌙 Overnight: Hampton Inn &amp; Suites Kittery-Portsmouth</span>
+      </div>
+    </details>
+  </section>
+
+  <section id="day1">
+    <details class="day">
+      <summary><span>Thu, Oct 1 — Drive Home</span><span class="chev">▶</span></summary>
+      <div class="day-body">
+        <p class="day-note">A straightforward travel day.</p>
+        <div class="timeline-item"><div class="time">7:00 AM</div><div class="desc">Breakfast</div></div>
+        <div class="timeline-item"><div class="time">8:00 AM</div><div class="desc">Leave Kittery, head south. Portsmouth NH is right across the river if you want a quick look, but it's fine to skip and just head home</div></div>
+        <div class="timeline-item"><div class="time">~10.5 hrs</div><div class="desc">Drive straight through to Waynesboro — early departure and real meal/rest breaks recommended</div></div>
+      </div>
+    </details>
+  </section>
+
+  <section id="dining">
+    <h2 class="section-title">Dining Plan</h2>
+    <div class="card">
+      <p style="margin-top:0;font-style:italic;color:var(--muted);">The idea: variety, not lobster at every meal.</p>
+
+      <div class="dining-day"><div class="d-label">Sep 27</div><div class="d-meal">Dinner: <b>Sultan's Turkish</b> (Waterbury)</div></div>
+      <div class="dining-day"><div class="d-label">Sep 28</div>
+        <div class="d-meal">Lunch: keep it light before the boat</div>
+        <div class="d-meal">Afternoon: 🦞 eat the lobster you catch (Lucky Catch)</div>
+        <div class="d-meal">Dinner: <b>Scales</b> or <b>Luke's Lobster Portland Pier</b></div>
+      </div>
+      <div class="dining-day"><div class="d-label">Sep 29</div>
+        <div class="d-meal">Lunch: <b>Linda Bean's</b> — classic lobster roll (Freeport)</div>
+        <div class="d-meal">Dinner: <b>Tuscan Brick Oven Bistro</b> (Freeport)</div>
+      </div>
+      <div class="dining-day"><div class="d-label">Sep 30</div>
+        <div class="d-meal">Breakfast: Brewster House (included)</div>
+        <div class="d-meal">Lunch: <b>The Clam Shack</b> — fried clams &amp; chowder (Kennebunkport)</div>
+        <div class="d-meal">Dinner: <b>Robert's Maine Grill</b> (Kittery) — final splurge</div>
+      </div>
+
+      <p style="font-weight:700;margin-bottom:6px;">Top 5 meals of the trip:</p>
+      <ol class="top-meals">
+        <li>Lucky Catch + eating the lobster you caught — the whole experience</li>
+        <li>Scales — best special dinner (Portland)</li>
+        <li>Linda Bean's classic lobster roll (Freeport)</li>
+        <li>Robert's Maine Grill — final dinner (Kittery)</li>
+        <li>The Clam Shack — fun roadside coastal food (Kennebunkport)</li>
+      </ol>
+      <p class="blueberry-note">🫐 Leave room for blueberry pie or blueberry ice cream somewhere along the way — it's Maine, you need at least one.</p>
+    </div>
+  </section>
+
+  <section id="musthave">
+    <h2 class="section-title">The "If We Never Come Back" List</h2>
+    <div class="card">
+      <ul class="must-list">
+        <li>Lucky Catch lobster boat <span class="tag-must">MUST</span></li>
+        <li>Portland Head Light <span class="tag-must">MUST</span></li>
+        <li>Nubble Lighthouse <span class="tag-must">MUST</span></li>
+        <li>Kennebunkport / Ocean Avenue <span class="tag-high">HIGH</span></li>
+        <li>Fort Foster <span class="tag-high">HIGH</span></li>
+        <li>Portland Old Port <span class="tag-high">HIGH</span></li>
+        <li>Eastern Promenade <span class="tag-high">HIGH</span></li>
+        <li>Cape Elizabeth <span class="tag-high">HIGH</span></li>
+        <li>Two Lights State Park <span class="tag-high">HIGH</span></li>
+        <li>Freeport <span class="tag-high">HIGH</span></li>
+        <li>Maine lobster roll <span class="tag-high">HIGH</span></li>
+        <li>Maine lobster dinner <span class="tag-high">HIGH</span></li>
+        <li>L.L.Bean flagship <span class="tag-med">MED</span></li>
+        <li>York Beach <span class="tag-med">MED</span></li>
+      </ul>
+      <p style="font-weight:700;margin:14px 0 6px;">Intentionally skipping this trip:</p>
+      <ul class="skip-list">
+        <li>Acadia National Park</li><li>Bar Harbor</li><li>Boothbay Harbor</li>
+        <li>Pemaquid Point</li><li>Extra museums</li><li>Long hikes</li>
+        <li>A second lobster boat</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="costs">
+    <h2 class="section-title">Costs</h2>
+    <table class="cost">
+      <tr><th>Item</th><th>Cost</th></tr>
+      <tr><td>Hampton Inn Waterbury (1 night)</td><td>$89.70</td></tr>
+      <tr><td>Hampton Inn &amp; Suites Portland West (1 night)</td><td>$127.23</td></tr>
+      <tr><td>Brewster House B&amp;B (1 night)</td><td>$224.54</td></tr>
+      <tr><td>Hampton Inn &amp; Suites Kittery-Portsmouth (1 night)</td><td>$116.63</td></tr>
+      <tr><td>Lucky Catch Cruises (2 adults)</td><td>$127.20</td></tr>
+      <tr><td>Gas (~1,400 mi round trip, est.)</td><td>~$180–200</td></tr>
+      <tr><td>Tolls (I-84, Mass Pike, I-95, Maine Tpke, est.)</td><td>~$50–70</td></tr>
+      <tr class="total"><td>Total (confirmed + estimated)</td><td>~$915–955</td></tr>
+    </table>
+  </section>
+
+  <section id="contacts">
+    <h2 class="section-title">Key Contacts</h2>
+    <div class="card">
+      <ul class="contact-list">
+        <li><span>Hampton Inn Waterbury</span><a class="tel" href="tel:+12037531777">(203) 753-1777</a></li>
+        <li><span>Hampton Inn &amp; Suites Portland West</span><a class="tel" href="tel:+12076133420">(207) 613-3420</a></li>
+        <li><span>Brewster House B&amp;B</span><a class="tel" href="tel:+12078654121">(207) 865-4121</a></li>
+        <li><span>Hampton Inn &amp; Suites Kittery-Portsmouth</span><a class="tel" href="tel:+12075447285">(207) 544-7285</a></li>
+        <li><span>Lucky Catch Cruises</span><a class="tel" href="tel:+12077610941">(207) 761-0941</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  🦞 Maine Coast Trip · Sept 27 – Oct 1, 2026 · Safe travels, Michael &amp; Anne
+</footer>
+
+</body>
+</html>
